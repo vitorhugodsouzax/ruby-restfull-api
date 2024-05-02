@@ -30,9 +30,6 @@ environment ENV.fetch("RAILS_ENV") { "development" }
 
 # Specifies the `pidfile` that Puma will use.
 pidfile ENV.fetch("PIDFILE") { "tmp/pids/server.pid" }
-
-# Bind the server to localhost:3000
-bind 'tcp://127.0.0.1:3000'
-
+  
 # Allow puma to be restarted by `bin/rails restart` command.
 plugin :tmp_restart
