@@ -43,7 +43,8 @@ Rails.application.configure do
 
   # Raise exceptions for disallowed deprecations.
   config.active_support.disallowed_deprecation = :raise
-
+ # config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+ config.file_watcher = ActiveSupport::FileUpdateChecker
   # Tell Active Support which deprecation messages to disallow.
   config.active_support.disallowed_deprecation_warnings = []
 
