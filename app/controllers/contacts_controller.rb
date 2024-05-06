@@ -13,7 +13,7 @@ class ContactsController < ApplicationController
   # GET /contacts/1
   def show
      # Renderiza o contato específico como JSON para ser exibido
-    render json: @contact.to_br #include: :kind
+    render json: @contact#, include: :kind
   end
 
   # POST /contacts
