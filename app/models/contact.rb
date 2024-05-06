@@ -1,6 +1,8 @@
 class Contact < ApplicationRecord
-belongs_to :kind#, optional: true
 
+  #associations
+belongs_to :kind#, optional: true
+has_many :phone
 
 # def birthdate_br
   #   I18n.l(self.birthdate) unless self.birthdate.blank?
