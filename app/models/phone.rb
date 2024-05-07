@@ -1,3 +1,4 @@
 class Phone < ApplicationRecord
-  belongs_to :contact #phone pertence a contatos
+  belongs_to :contact, optional: true #phone pertence a contatos
+  
 end

@@ -13,8 +13,8 @@ class ContactsController < ApplicationController
   # GET /contacts/1
   def show
      # Renderiza o contato específico como JSON para ser exibido
-    render json: @contact#, include: :kind
-  end
+     render json: @contact, include: [:kind, :phones]  
+      end
 
   # POST /contacts
   def create
@@ -23,7 +23,7 @@ class ContactsController < ApplicationController
     # Se o contato for salvo com sucesso, retorna o contato criado como JSON
     # Caso contrário, retorna os erros de validação como JSON
     if @contact.save
-      render json: @contact, status: :created, location: @contact
+      render json: @contact, include: [:kind, :phones], status: :created, location: @contact
     else
       render json: @contact.errors, status: :unprocessable_entity
     end
@@ -35,7 +35,7 @@ class ContactsController < ApplicationController
     # Retorna o contato atualizado como JSON se for bem-sucedido
     # Caso contrário, retorna os erros de validação como JSON
     if @contact.update(contact_params)
-      render json: @contact
+      render json: @contact, include: [:kind, :phones]
     else
       render json: @contact.errors, status: :unprocessable_entity
     end
@@ -56,6 +56,8 @@ class ContactsController < ApplicationController
     # Only allow a list of trusted parameters through.
     # Método auxiliar para especificar quais parâmetros são permitidos para criação ou atualização de um contato
     def contact_params
-      params.require(:contact).permit(:name, :email, :birthdate, :kind_id)
-    end
+      params.require(:contact).permit(
+        :name, :email, :birthdate, :kind_id,
+        phones_attributes: [:id, :number, :_destroy]
+      )    end
 end
