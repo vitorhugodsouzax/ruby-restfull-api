@@ -6,8 +6,7 @@ class ContactsController < ApplicationController
   def index
     # Obtém todos os contatos do banco de dados
     @contacts = Contact.all
-    # Renderiza os contatos como JSON para serem exibidos
-
+    # Renderiza os contatos como JSON para serem exibidos 
     render json: @contacts #, methods: :birthdate_br #[:hello, :i18n]  end
   end
   # GET /contacts/1
