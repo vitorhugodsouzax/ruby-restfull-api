@@ -1,9 +1,8 @@
 class ApplicationController < ActionController::API
-
-before_filter :ensure_json_request
-
-def ensure_json_request
-    return if request.headers["Accept"] =~ /vnd\.api\+json/
-    render :nothing => true, :status => 406
-end
+  before_action :ensure_json_request, except: [:show, :index]
+  def ensure_json_request
+    unless request.headers["Accept"].include?("application/json")
+      render json: { error: "Tipo de conteúdo não suportado" }, status: :not_acceptable
+    end
+  end
 end
