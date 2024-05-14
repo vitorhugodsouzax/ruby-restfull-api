@@ -1,8 +1,10 @@
 class ApplicationController < ActionController::API
-  before_action :ensure_json_request, except: [:show, :index]
+  before_action :ensure_json_request
+
+  private
+  
   def ensure_json_request
-    unless request.headers["Accept"].include?("application/json")
-      render json: { error: "Tipo de conteúdo não suportado" }, status: :not_acceptable
-    end
+    return if request.headers["Accept"]&.include?("application/vnd.api+json")
+    head :not_acceptable
   end
 end
